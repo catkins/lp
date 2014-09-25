@@ -4,13 +4,16 @@ require 'thor'
 # require 'coding_exercise'
 
 class Processor < Thor
+  DEFAULT_OUTPUT_PATH = File.expand_path '../../dist', __FILE__
 
   desc 'build', 'build static site'
   option :taxonomy, required: true, aliases: ['-t'], banner: 'PATH_TO_TAXONOMY_XML'
   option :destinations, required: true, aliases: ['-d'], banner: 'PATH_TO_DESTINATIONS_XML'
+  option :output, aliases: ['-o'], banner: 'OUTPUT_DIRECTORY', default: DEFAULT_OUTPUT_PATH
   def build
     puts "destinations = #{options[:destinations]}"
     puts "taxonomy = #{options[:taxonomy]}"
+    puts "output = #{options[:output]}"
   end
 
   default_task :build
