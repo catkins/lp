@@ -10,6 +10,14 @@ class TaxonomyNode
     xml.at('node_name').text
   end
 
+  def ancestors
+    if parent.nil?
+      []
+    else
+      parent.ancestors + [ parent ]
+    end
+  end
+
   def node_id
     xml.attr 'atlas_node_id'
   end
