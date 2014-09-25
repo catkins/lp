@@ -23,4 +23,17 @@ describe DestinationParser do
       expect(subject.destinations.first).to be_a Destination
     end
   end
+
+  describe '#find_by_atlas_id' do
+    let(:atlas_id) { 355612 }
+    let(:result) { subject.find_by_atlas_id(atlas_id) }
+
+    it 'returns a Destination' do
+      expect(result).to be_a Destination
+    end
+
+    it 'sets the correct title' do
+      expect(result.title).to eq 'Cape Town'
+    end
+  end
 end
