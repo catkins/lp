@@ -4,7 +4,7 @@ module XmlHelpers
     def xml_attributes(*attributes)
       attributes.each do |attribute|
         define_method(attribute) do
-          xml.attr(attribute)
+          xml.attr(attribute.to_s).to_s
         end
       end
     end
