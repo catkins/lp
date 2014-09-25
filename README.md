@@ -25,9 +25,3 @@ When we receive your project the code will be:
   c. Extensibility.
   d. Reliability.
   e. Performance (run against the larger dataset).
-
-Feedback at this stage will be provided to all candidates if requested.
-
-If the code evaluation goes well we will invite you in to implement some new requirements within your original project. You can choose to bring in your own laptop with your development environment loaded if you are more comfortable with that, or we can provide you with an iMac and Sublime Text 2.
-
-If you have any questions about this test feel free to email: adel.smee@lonelyplanet.com.au.
