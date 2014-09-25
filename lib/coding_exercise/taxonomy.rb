@@ -9,22 +9,16 @@ class Taxonomy
     xml.at('taxonomy_name').text
   end
 
-  def ancestors
-    []
-  end
-
-  def children
+  def nodes
     xml.xpath('node').lazy.map do |node|
-      TaxonomyNode.new node, self
+      TaxonomyNode.new node
     end
   end
 
 
   def traverse(&block)
-    yield self
-
-    children.each do |child|
-      child.traverse &block
+    nodes.each do |node|
+      node.traverse &block
     end
   end
 end

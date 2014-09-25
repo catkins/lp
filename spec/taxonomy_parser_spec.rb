@@ -28,7 +28,7 @@ describe TaxonomyParser do
     it 'visits all of the elements in the taxonomy' do
       count = 0
       subject.traverse { |node| count += 1 }
-      expect(count).to eq 25
+      expect(count).to eq 24
     end
   end
  end
