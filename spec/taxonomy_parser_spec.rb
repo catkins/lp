@@ -23,4 +23,12 @@ describe TaxonomyParser do
       expect(subject.taxonomies.first).to be_a Taxonomy
     end
   end
+
+  describe 'traverse' do
+    it 'visits all of the elements in the taxonomy' do
+      count = 0
+      subject.traverse { |node| count += 1 }
+      expect(count).to eq 25
+    end
+  end
  end

@@ -31,4 +31,12 @@ class TaxonomyNode
       TaxonomyNode.new node, self
     end
   end
+
+  def traverse(&block)
+    yield self
+
+    children.each do |child|
+      child.traverse &block
+    end
+  end
 end

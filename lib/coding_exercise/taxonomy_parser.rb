@@ -13,4 +13,8 @@ class TaxonomyParser
     xml.xpath('//taxonomy').lazy.map { |node| Taxonomy.new node }
   end
 
+  def traverse(&block)
+    taxonomies.each { |taxonomy| taxonomy.traverse &block }
+  end
+
 end
