@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require 'thor'
+# require 'coding_exercise'
+
+class Processor < Thor
+
+  desc 'build', 'build static site'
+  option :taxonomy, required: true, aliases: ['-t'], banner: 'PATH_TO_TAXONOMY_XML'
+  option :destinations, required: true, aliases: ['-d'], banner: 'PATH_TO_DESTINATIONS_XML'
+  def build
+    puts "destinations = #{options[:destinations]}"
+    puts "taxonomy = #{options[:taxonomy]}"
+  end
+
+  default_task :build
+end
+
+
+Processor.start(ARGV)
