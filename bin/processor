@@ -1,7 +1,10 @@
 #!/usr/bin/env ruby
 
+# add lib directory to load path
+$: << File.expand_path("../../lib/", __FILE__)
+
 require 'thor'
-# require 'coding_exercise'
+require 'coding_exercise'
 
 class Processor < Thor
   DEFAULT_OUTPUT_PATH = File.expand_path '../../dist', __FILE__
