@@ -1,4 +1,8 @@
 class TaxonomyNode
+  include XmlHelpers
+
+  xml_attributes :atlas_node_id, :ethyl_content_object_id
+
   attr_reader :xml, :parent
 
   def initialize(xml, parent = nil)
@@ -10,20 +14,16 @@ class TaxonomyNode
     xml.at('node_name').text
   end
 
+  def atlas_id
+    atlas_node_id
+  end
+
   def ancestors
     if parent.nil?
       []
     else
       parent.ancestors + [ parent ]
     end
-  end
-
-  def node_id
-    xml.attr 'atlas_node_id'
-  end
-
-  def ethyl_content_object_id
-    xml.attr 'ethyl_content_object_id'
   end
 
   def children
