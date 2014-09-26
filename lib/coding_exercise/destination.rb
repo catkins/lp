@@ -12,4 +12,17 @@ class Destination
   def name
     title
   end
+
+  def slug
+    dasherised_name = name.downcase.gsub(' ', '-')
+    "#{atlas_id}-#{dasherised_name}"
+  end
+
+  def file_name
+    "#{slug}.html"
+  end
+
+  def introduction
+    xml.xpath('introductory/introduction/overview').children.first.text.split("\n\n")
+  end
 end

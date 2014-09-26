@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 class TaxonomyParser
   attr_reader :xml
 

@@ -28,7 +28,11 @@ class TaxonomyNode
 
   def slug
     dasherised_name = name.downcase.gsub(' ', '-')
-    "#{atlas_node_id}-#{dasherised_name}"
+    "#{atlas_id}-#{dasherised_name}"
+  end
+
+  def file_name
+    "#{slug}.html"
   end
 
   def children
