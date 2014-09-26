@@ -19,7 +19,23 @@
             <h3>Navigation</h3>
             <div class="content">
               <div class="inner">
-                HIERARCHY NAVIGATION GOES HERE
+                <ul class="navigation">
+                <% taxonomy.ancestors.each do |node| %>
+                  <li>
+                    <a href="<%= node.file_name %>"><%= node.name %></a>
+                  </li>
+                <% end %>
+
+                <li>
+                  <a class="active" href="<%= destination.file_name %>"><%= destination.name %></a>
+                </li>
+
+                <% taxonomy.children.each do |node| %>
+                  <li>
+                    <a href="<%= node.file_name %>"><%= node.name %></a>
+                  </li>
+                <% end %>
+                </ul>
               </div>
             </div>
           </div>
