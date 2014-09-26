@@ -8,18 +8,60 @@ require 'coding_exercise'
 
 class Processor < Thor
   DEFAULT_OUTPUT_PATH = File.expand_path '../../dist', __FILE__
+  DEFAULT_TEMPLATE_PATH = File.expand_path('../../lib/coding_exercise/views/destination.html.erb', __FILE__)
 
   desc 'build', 'build static site'
-  option :taxonomy, required: true, aliases: ['-t'], banner: 'PATH_TO_TAXONOMY_XML'
+  option :taxonomy,     required: true, aliases: ['-t'], banner: 'PATH_TO_TAXONOMY_XML'
   option :destinations, required: true, aliases: ['-d'], banner: 'PATH_TO_DESTINATIONS_XML'
   option :output, aliases: ['-o'], banner: 'OUTPUT_DIRECTORY', default: DEFAULT_OUTPUT_PATH
   def build
-    puts "destinations = #{options[:destinations]}"
-    puts "taxonomy = #{options[:taxonomy]}"
-    puts "output = #{options[:output]}"
+    taxonomy_parser    = build_taxonomy_parser
+    destination_parser = build_destination_parser
+    renderer           = build_renderer
+
+    BatchProcessor.new({
+      destination_parser: destination_parser,
+      taxonomy_parser:    taxonomy_parser,
+      renderer:           renderer
+    }).call do |output, destination|
+      save_file output, destination
+    end
   end
 
   default_task :build
+
+  private
+
+  def build_renderer
+    Renderer.new File.read DEFAULT_TEMPLATE_PATH
+  end
+
+  def build_taxonomy_parser
+    taxonomy_file = load_file options[:taxonomy]
+    TaxonomyParser.new taxonomy_file
+  end
+
+  def build_destination_parser
+    destinations_file = load_file options[:destinations]
+    DestinationParser.new destinations_file
+  end
+
+  def load_file(path)
+    if File.exists? path
+      File.open path
+    else
+      puts "No such file #{path}. Aborting processing."
+      exit 1
+    end
+  end
+
+  def save_file(output, destination)
+    file_name = File.join options[:output], destination.file_name
+    puts "writing #{destination.file_name}"
+    file = File.new file_name, 'w'
+    file.write output
+    file.close
+  end
 end
 
 
