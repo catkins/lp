@@ -26,6 +26,11 @@ class TaxonomyNode
     end
   end
 
+  def slug
+    dasherised_name = name.downcase.gsub(' ', '-')
+    "#{atlas_node_id}-#{dasherised_name}"
+  end
+
   def children
     xml.xpath('node').lazy.map do |node|
       TaxonomyNode.new node, self

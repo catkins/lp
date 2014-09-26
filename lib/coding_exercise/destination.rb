@@ -8,4 +8,8 @@ class Destination
   def initialize(xml)
     @xml = xml
   end
+
+  def name
+    title
+  end
 end
