@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 class DestinationParser
   attr_reader :xml
 
