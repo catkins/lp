@@ -10,15 +10,9 @@ class Renderer < Struct.new(:template)
     @erb = ERB.new template
   end
 
-
   class TemplateContext < Struct.new(:destination, :taxonomy)
-    def link_to(taxonomy_node)
-      "#{taxonomy_node.slug}.html"
-    end
-
     def get_binding
       binding
     end
   end
-
 end

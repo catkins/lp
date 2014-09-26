@@ -9,7 +9,7 @@ describe Renderer do
       <body>
         <header>
           <nav>
-            <a id="parent" href="<%= link_to taxonomy.parent %>">
+            <a id="parent" href="<%= taxonomy.parent.file_name %>">
               <%= taxonomy.parent.name %>
             </a>
           </nav>
@@ -33,7 +33,7 @@ describe Renderer do
 
   describe '#render' do
     let(:destination) { instance_double('Destination', name: 'Cootamundra') }
-    let(:parent) { instance_double('TaxonomyNode', name: 'New South Wales', slug: '123-nsw' ) }
+    let(:parent) { instance_double('TaxonomyNode', name: 'New South Wales', file_name: 'nsw.html' ) }
     let(:taxonomy) { instance_double('TaxonomyNode', parent: parent) }
     let(:html) { subject.render(destination, taxonomy) }
     let(:document) { Nokogiri.HTML(html) { |config| config.strict.noblanks } }
@@ -54,9 +54,9 @@ describe Renderer do
       expect(element_at('header nav').text).to include parent.name
     end
 
-    it 'renders links based on slug' do
+    it 'renders links based on model file' do
       href = element_at('a#parent:first').attr('href').text
-      expect(href).to include parent.slug
+      expect(href).to include parent.file_name
     end
   end
 
