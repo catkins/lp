@@ -36,4 +36,14 @@ describe DestinationParser do
       expect(result.title).to eq 'Cape Town'
     end
   end
+
+  describe '#count' do
+    let(:destinations_count) { 24 }
+
+    it { is_expected.to respond_to :count }
+
+    it 'returns the number of destinations in the source document' do
+      expect(subject.count).to eq destinations_count
+    end
+  end
 end

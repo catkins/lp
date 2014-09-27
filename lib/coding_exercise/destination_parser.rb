@@ -15,6 +15,10 @@ class DestinationParser
     xml.xpath('//destination').lazy.map { |node| Destination.new node }
   end
 
+  def count
+    xml.xpath('//destination').size
+  end
+
   def find_by_atlas_id(atlas_id)
     node = xml.xpath "//destination[@atlas_id=#{atlas_id}]"
     Destination.new node
