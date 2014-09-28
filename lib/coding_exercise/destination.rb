@@ -27,9 +27,8 @@ class Destination
 
       section 'Introduction',             'introductory//text()'
 
-      section 'History', 'history//overview//text()' do
-        section 'History', 'history//history/history//text()'
-
+      section 'History',                    'history//overview//text()' do
+        section 'History',                  'history//history/history//text()'
       end
 
       section 'Practical information' do
@@ -45,13 +44,13 @@ class Destination
           section 'Money',                  'practical_information//money_and_costs/money/text()'
         end
 
-        section 'Visas', 'practical_information//visas/overview/text()' do
-          section 'Other', 'practical_information//visas/other/text()'
+        section 'Visas',                    'practical_information//visas/overview/text()' do
+          section 'Other',                  'practical_information//visas/other/text()'
         end
       end
 
       section 'Transport' do
-        section 'Getting Around', 'transport//getting_around/overview/text()' do
+        section 'Getting Around',           'transport//getting_around/overview/text()' do
           section 'Air',                    'transport//getting_around/air/text()'
           section 'Bicycle',                'transport//getting_around/bicycle/text()'
           section 'Car and Motorcycle',     'transport//getting_around/car_and_motorcycle/text()'
@@ -64,8 +63,14 @@ class Destination
         end
       end
 
-      section 'Weather', 'weather//when_to_go/overview/text()' do
-        section 'Climate',                'weather//when_to_go/climate/text()'
+      section 'Weather',                    'weather//when_to_go/overview/text()' do
+        section 'Climate',                  'weather//when_to_go/climate/text()'
+      end
+
+      section 'Work / Live / Study' do
+        section 'Work',                     'work_live_study/work/overview/text()' do
+          section 'Business',               'work_live_study/work/business/text()'
+        end
       end
     end
   end
