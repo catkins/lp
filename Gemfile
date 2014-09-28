@@ -14,3 +14,8 @@ group :test, :development do
   gem 'pry-debugger'
   gem 'awesome_print'
 end
+
+group :test do
+  gem 'rspec-collection_matchers'
+  gem 'simplecov', require: false
+end
