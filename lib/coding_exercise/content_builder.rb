@@ -1,12 +1,10 @@
 class ContentBuilder
+
   attr_reader :xml, :sections
 
-  class << self
-    def build(xml, &block)
-      builder = ContentBuilder.new(xml)
-      builder.instance_eval &block
-      builder.sections
-    end
+  def initialize(xml)
+    @xml = xml
+    @sections = []
   end
 
   def section(section_title, path = nil, &block)
@@ -17,9 +15,9 @@ class ContentBuilder
     sections << section unless section.empty?
   end
 
-  def initialize(xml)
-    @xml = xml
-    @sections = []
+  def build(&block)
+    instance_eval &block
+    sections
   end
 
   class ContentSection

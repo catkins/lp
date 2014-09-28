@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<articles>
+  <article name="First Article">
+    <introduction>
+      <overview>
+        <![CDATA[This is the overview]]>
+      </overview>
+    </introduction>
+    <beginning>
+    </beginning>
+    <middle>
+      <content><![CDATA[This is a paragraph in the middle]]></content>
+    </middle>
+    <middle>
+      <content><![CDATA[This is another paragraph in the middle]]></content>
+    </middle>
+    <end>
+      <![CDATA[This is the end of the article]]>
+    </end>
+  </article>
+
+  <article name="Second Article">
+    <introduction>
+      <overview>
+        <![CDATA[This is the overview]]>
+      </overview>
+    </introduction>
+    <end>
+      <![CDATA[This is the end of the article]]>
+    </end>
+  </article>
+</articles>

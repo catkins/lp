@@ -56,7 +56,7 @@ I created a lightweight internal DSL to help me decouple the xml structure, and 
 ```ruby
 # lib/coding_exercise/destination.rb
 
-ContentBuilder.build(xml) do
+ContentBuilder.new(xml).build do
 
   section 'Introduction',               'introductory//text()'
 

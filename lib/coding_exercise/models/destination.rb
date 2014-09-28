@@ -23,7 +23,7 @@ class Destination
   end
 
   def sections
-    @sections ||= ContentBuilder.build(xml) do
+    @sections ||= content_builder.build do
 
       section 'Introduction',             'introductory//text()'
 
@@ -73,5 +73,11 @@ class Destination
         end
       end
     end
+  end
+
+  private
+
+  def content_builder
+    @builder ||= ContentBuilder.new(xml)
   end
 end
