@@ -19,7 +19,7 @@ module TemplateHelpers
     end
 
     def render_heading_for_section(section)
-      tag_name = "h#{section.level}"
+      tag_name = "h#{section.depth}"
       "<#{tag_name}>#{ html_escape section.title }</#{tag_name}>"
     end
 
