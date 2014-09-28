@@ -1,6 +1,18 @@
-require 'coding_exercise'
+require 'rspec/collection_matchers'
+require 'simplecov'
 require 'pry'
 require 'nokogiri'
+
+if ENV['COVERAGE']
+  SimpleCov.start do
+     add_filter '/spec/'
+     add_group 'Models', 'models'
+     add_group 'Helpers', 'helpers'
+     add_group 'Parsers', 'parser'
+  end
+end
+
+require 'coding_exercise'
 
 RSpec.configure do |config|
 
