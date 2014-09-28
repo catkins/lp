@@ -11,7 +11,7 @@ class BatchProcessor
   def call(&block)
     taxonomy_parser.traverse do |node|
       destination = find_destination_info node
-      html = renderer.render destination, node
+      html        = renderer.render destination, node
       yield html, destination
     end
   end
