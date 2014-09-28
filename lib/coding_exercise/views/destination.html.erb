@@ -57,19 +57,7 @@
               <div class="inner">
 
                 <% destination.sections.each do |section| %>
-                  <h1><%= section.title %></h1>
-
-                  <% section.sub_sections.each do |sub_section| %>
-
-                    <h3><%= sub_section.title %></h3>
-
-                    <% sub_section.paragraphs.each do |paragraph| %>
-                      <p><%= paragraph %></p>
-                    <% end %>
-
-                  <% end %>
-
-                  <hr/>
+                  <%= render_section section %>
                 <% end  %>
 
               </div>

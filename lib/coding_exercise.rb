@@ -1,4 +1,5 @@
 require 'coding_exercise/helpers/xml_helpers'
+require 'coding_exercise/helpers/template_helpers'
 require 'coding_exercise/taxonomy'
 require 'coding_exercise/taxonomy_node'
 require 'coding_exercise/taxonomy_parser'
