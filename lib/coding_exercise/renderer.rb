@@ -11,6 +11,8 @@ class Renderer < Struct.new(:template)
   end
 
   class TemplateContext < Struct.new(:destination, :taxonomy)
+    include TemplateHelpers
+
     def get_binding
       binding
     end
