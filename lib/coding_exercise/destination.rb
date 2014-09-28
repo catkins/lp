@@ -23,11 +23,9 @@ class Destination
   end
 
   def sections
-    @sections ||= ContentBuilder.build(title, xml) do
+    @sections ||= ContentBuilder.build(xml) do
 
-      section(title) do
-        section 'Introduction',           'introductory//text()'
-      end
+      section 'Introduction',             'introductory//text()'
 
       section 'History', 'history//overview//text()' do
         section 'History', 'history//history/history//text()'

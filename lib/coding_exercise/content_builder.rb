@@ -1,16 +1,17 @@
 class ContentBuilder
-  attr_reader :title, :xml, :sections
+  attr_reader :xml, :sections
 
   class << self
-    def build(title, xml, &block)
+    def build(xml, &block)
       builder = ContentBuilder.new(xml)
       builder.instance_eval &block
+      builder.sections
     end
   end
 
   def section(section_title, path = nil, &block)
-    level = 1
-    section = Section.new section_title, path, xml, level
+    level = 2
+    section = ContentSection.new section_title, path, xml, level
 
     section.instance_eval(&block) if block_given?
     sections << section unless section.empty?
@@ -21,7 +22,7 @@ class ContentBuilder
     @sections = []
   end
 
-  class Section
+  class ContentSection
     attr_reader :title, :path, :sub_sections, :xml, :level
 
     def initialize(title, path, xml, level)
@@ -33,19 +34,19 @@ class ContentBuilder
     end
 
     def empty?
-      false
+      paragraphs.none? && sub_sections.none?
     end
 
     def paragraphs
       if path
-        @paragraphs ||= xml.xpath(path).map(&:text) || []
+        @paragraphs ||= xml.xpath(path).map(&:text)
       else
-        []
+        @paragraphs = []
       end
     end
 
     def section(title, path = nil, &block)
-      sub_section = Section.new title, path, xml, (level + 1)
+      sub_section = ContentSection.new title, path, xml, (level + 1)
 
       sub_section.instance_eval(&block) if block_given?
 
