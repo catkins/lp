@@ -43,7 +43,7 @@ bin/processor -t spec/data/taxonomy.xml -d spec/data/destinations.xml
 ## Running the specs
 
 ```
-rake
+bundle exec rake
 ```
 
 ## Overview
