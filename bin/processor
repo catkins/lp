@@ -7,17 +7,20 @@ require 'thor'
 require 'coding_exercise'
 require 'ruby-progressbar'
 
-class Processor < Thor
-  DEFAULT_OUTPUT_PATH = File.expand_path '../../dist', __FILE__
-  LIBRARY_PATH = File.expand_path '../../lib/coding_exercise', __FILE__
+class ProcessorCLI < Thor
+  DEFAULT_OUTPUT_PATH   = File.expand_path '../../dist', __FILE__
+  LIBRARY_PATH          = File.expand_path '../../lib/coding_exercise', __FILE__
   DEFAULT_TEMPLATE_PATH = File.join LIBRARY_PATH, 'views/destination.html.erb'
-  STATIC_ASSETS_PATH = File.join LIBRARY_PATH, 'static'
+  STATIC_ASSETS_PATH    = File.join LIBRARY_PATH, 'static'
 
   class_option :output, aliases: ['-o'], banner: 'OUTPUT_DIRECTORY', default: DEFAULT_OUTPUT_PATH
 
   desc 'build', 'Generates static site in output directory'
+
   option :taxonomy,     required: true, aliases: ['-t'], banner: 'PATH_TO_TAXONOMY_XML'
+
   option :destinations, required: true, aliases: ['-d'], banner: 'PATH_TO_DESTINATIONS_XML'
+
   def build
     taxonomy_parser    = build_taxonomy_parser
     destination_parser = build_destination_parser
@@ -32,8 +35,8 @@ class Processor < Thor
       destination_parser: destination_parser,
       taxonomy_parser:    taxonomy_parser,
       renderer:           renderer
-    }).call do |output, destination|
-      save_file output, destination
+    }).call do |html, destination|
+      save_file html, destination
       progress.increment
     end
   end
@@ -75,18 +78,18 @@ class Processor < Thor
     TaxonomyParser.new taxonomy_file
   end
 
+  def build_destination_parser
+    destinations_file = load_file options[:destinations]
+    DestinationParser.new destinations_file
+  end
+
   def create_progress_bar(total)
     ProgressBar.create({
       title: 'Rendered',
       starting_at: 0,
       total: total,
-      format: '%a %b|%i %p%% %t'
+      format: '%t - %a %b|%i %p%%'
     })
-  end
-
-  def build_destination_parser
-    destinations_file = load_file options[:destinations]
-    DestinationParser.new destinations_file
   end
 
   def load_file(path)
@@ -98,12 +101,12 @@ class Processor < Thor
     end
   end
 
-  def save_file(output, destination)
+  def save_file(html, destination)
     file_name = File.join options[:output], destination.file_name
     file = File.new file_name, 'w'
-    file.write output
+    file.write html
     file.close
   end
 end
 
-Processor.start(ARGV)
+ProcessorCLI.start(ARGV)
