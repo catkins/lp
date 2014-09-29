@@ -1,8 +1,4 @@
 module TemplateHelpers
-  module ClassMethods
-
-  end
-
   module InstanceMethods
     def render_section(section)
       buffer = ""
@@ -31,7 +27,6 @@ module TemplateHelpers
   end
 
   def self.included(receiver)
-    receiver.extend         ClassMethods
     receiver.send :include, ERB::Util
     receiver.send :include, InstanceMethods
   end
