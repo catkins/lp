@@ -129,8 +129,8 @@ describe ProcessorCLI do
         capture(:stdout) { ProcessorCLI.start args }
       end
 
-      it 'creates a Renderer with the template content' do
-        expect(Renderer).to receive(:new).with(@template_content).and_call_original
+      it 'creates a DestinationRenderer with the template content' do
+        expect(DestinationRenderer).to receive(:new).with(@template_content).and_call_original
         capture(:stdout) { ProcessorCLI.start args }
       end
 

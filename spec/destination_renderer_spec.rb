@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Renderer do
+describe DestinationRenderer do
 
   let(:template) do
     <<-HTML
@@ -25,7 +25,7 @@ describe Renderer do
     HTML
   end
 
-  subject(:renderer) { Renderer.new template }
+  subject(:renderer) { DestinationRenderer.new template }
 
   it { is_expected.not_to be_nil }
   it { is_expected.to respond_to :render }

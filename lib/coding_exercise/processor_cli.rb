@@ -65,7 +65,7 @@ class ProcessorCLI < Thor
   end
 
   def build_renderer
-    Renderer.new File.read DEFAULT_TEMPLATE_PATH
+    DestinationRenderer.new File.read DEFAULT_TEMPLATE_PATH
   end
 
   def build_taxonomy_parser

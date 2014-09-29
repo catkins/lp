@@ -1,6 +1,6 @@
 require 'erb'
 
-class Renderer < Struct.new(:template)
+class DestinationRenderer < Struct.new(:template)
   def render(destination, taxonomy)
     context = TemplateContext.new(destination, taxonomy)
     erb.result context.get_binding
