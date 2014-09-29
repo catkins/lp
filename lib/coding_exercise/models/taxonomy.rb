@@ -15,7 +15,6 @@ class Taxonomy
     end
   end
 
-
   def traverse(&block)
     nodes.each do |node|
       node.traverse &block
