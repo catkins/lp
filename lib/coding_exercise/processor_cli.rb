@@ -10,9 +10,7 @@ class ProcessorCLI < Thor
   class_option :output, aliases: ['-o'], banner: 'OUTPUT_DIRECTORY', default: DEFAULT_OUTPUT_PATH
 
   desc 'build', 'Generates static site in output directory'
-
   option :taxonomy,     required: true, aliases: ['-t'], banner: 'PATH_TO_TAXONOMY_XML'
-
   option :destinations, required: true, aliases: ['-d'], banner: 'PATH_TO_DESTINATIONS_XML'
 
   def build
@@ -36,6 +34,7 @@ class ProcessorCLI < Thor
   end
 
   desc 'clean', 'Remove generated site'
+
   def clean
     if yes? "This will delete #{output_directory} and its contents. Type 'yes' to proceed"
       say "Deleting #{output_directory}"
