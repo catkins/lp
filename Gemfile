@@ -18,5 +18,6 @@ end
 group :test do
   gem 'fakefs', require: false
   gem 'rspec-collection_matchers'
+  gem 'rspec-its'
   gem 'simplecov', require: false
 end

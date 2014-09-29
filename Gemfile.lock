@@ -42,6 +42,9 @@ GEM
     rspec-expectations (3.1.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.1.0)
+    rspec-its (1.0.1)
+      rspec-core (>= 2.99.0.beta1)
+      rspec-expectations (>= 2.99.0.beta1)
     rspec-mocks (3.1.1)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.0)
@@ -66,6 +69,7 @@ DEPENDENCIES
   pry-stack_explorer
   rspec
   rspec-collection_matchers
+  rspec-its
   ruby-progressbar
   simplecov
   thor

@@ -1,4 +1,5 @@
 require 'rspec/collection_matchers'
+require 'rspec/its'
 require 'simplecov'
 require 'pry'
 require 'fakefs/safe'
