@@ -1,11 +1,6 @@
 require 'spec_helper'
 
 describe ProcessorCLI do
-  # before(:all) do
-  #   @taxonomy_content     = File.read File.expand_path('../data/taxonomy.xml', __FILE__)
-  #   @destinations_content = File.read File.expand_path('../data/destinations.xml', __FILE__)
-  # end
-
   before(:each) do
    FakeFS.activate!
    FakeFS::FileSystem.clear
@@ -124,9 +119,42 @@ describe ProcessorCLI do
     end
 
     context 'when valid file paths passed' do
+      let(:static_assets_path) { ProcessorCLI::STATIC_ASSETS_PATH }
+      let(:output_path) { ProcessorCLI::DEFAULT_OUTPUT_PATH }
       let(:args) { ['build', '-d', destinations_path, '-t', taxonomy_path ] }
 
 
+      it "copies the static assets to the output path" do
+        expect(FileUtils).to receive(:cp_r).with static_assets_path, output_path
+        capture(:stdout) { ProcessorCLI.start args }
+      end
+
+      it 'creates a Renderer with the template content' do
+        expect(Renderer).to receive(:new).with(@template_content).and_call_original
+        capture(:stdout) { ProcessorCLI.start args }
+      end
+
+      it "reads the taxonomy file" do
+        allow(File).to receive(:open).with(destinations_path).and_call_original
+        expect(File).to receive(:open).with(taxonomy_path).and_call_original
+        capture(:stdout) { ProcessorCLI.start args }
+      end
+
+      it 'creates a TaxonomyParser with a file handle' do
+        expect(TaxonomyParser).to receive(:new).with(File).and_call_original
+        capture(:stdout) { ProcessorCLI.start args }
+      end
+
+      it "reads the destinations file" do
+        allow(File).to receive(:open).with(taxonomy_path).and_call_original
+        expect(File).to receive(:open).with(destinations_path).and_call_original
+        capture(:stdout) { ProcessorCLI.start args }
+      end
+
+      it 'creates a DestinationParser with a file handle' do
+        expect(DestinationParser).to receive(:new).with(File).and_call_original
+        capture(:stdout) { ProcessorCLI.start args }
+      end
     end
   end
 
