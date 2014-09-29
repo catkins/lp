@@ -1,6 +1,8 @@
 require 'rspec/collection_matchers'
 require 'simplecov'
 require 'pry'
+require 'fakefs/safe'
+require 'fakefs/spec_helpers'
 require 'nokogiri'
 
 if ENV['COVERAGE']

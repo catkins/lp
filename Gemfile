@@ -16,6 +16,7 @@ group :test, :development do
 end
 
 group :test do
+  gem 'fakefs', require: false
   gem 'rspec-collection_matchers'
   gem 'simplecov', require: false
 end
