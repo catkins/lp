@@ -4,7 +4,7 @@ require 'rspec/core/rake_task'
 # Run with `rake spec`
 RSpec::Core::RakeTask.new(:spec) do |task|
   ENV['COVERAGE'] = ''
-  task.rspec_opts = ['--color', '--format', 'doc']
+  task.rspec_opts = ['--color', '--format', 'doc', '--order', 'rand']
 end
 
 task :default => :spec
