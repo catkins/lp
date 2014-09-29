@@ -8,47 +8,31 @@ describe Destination do
   subject(:destination) { Destination.new xml }
 
   it { should_not be_nil }
-  it { should respond_to :sections }
-  it { should respond_to :file_name }
 
   describe "XML attributes" do
     describe '#title' do
       it { should respond_to :title }
 
-      it 'is read from xml attribute' do
-        expect(subject.title).to eq xml.attr('title')
-      end
+      its(:title) { is_expected.to eq xml.attr('title') }
     end
 
     describe '#atlas_id' do
       it { should respond_to :atlas_id }
 
-      it 'is read from xml attribute' do
-        expect(subject.atlas_id).to eq xml.attr('atlas_id')
-      end
+      its(:atlas_id) { is_expected.to eq xml.attr('atlas_id') }
     end
 
     describe '#asset_id' do
       it { should respond_to :asset_id }
 
-      it 'is read from xml attribute' do
-        expect(subject.asset_id).to eq xml.attr('asset_id')
-      end
-    end
-
-    describe '#title' do
-      it 'is read from xml attribute' do
-        expect(subject.title).to eq xml.attr('title')
-      end
+      its(:asset_id) { is_expected.to eq xml.attr('asset_id') }
     end
   end
 
   describe '#name' do
     it { should respond_to :name }
 
-    it 'is an alias for #title' do
-      expect(subject.name).to eq subject.title
-    end
+    its(:name) { is_expected.to eq subject.title }
   end
 
   describe '#slug' do
@@ -59,24 +43,22 @@ describe Destination do
       expect(subject.slug).to include processed_name
     end
 
-    it "contains the destination's atlas_id" do
-      expect(subject.slug).to include subject.atlas_id
-    end
+    its(:slug) { is_expected.to include subject.atlas_id }
   end
 
   describe '#file_name' do
     it { should respond_to :file_name }
 
-    it "contains the destination's slug" do
-      expect(subject.file_name).to include subject.slug
-    end
+    its(:file_name) { is_expected.to include subject.slug }
 
-    it "is an .html file" do
+    it "is an .html file name" do
       expect(File.extname(subject.file_name)).to eq '.html'
     end
   end
 
   describe '#sections' do
+    it { should respond_to :sections }
+
     describe 'top level sections' do
       let(:sections) { subject.sections }
 
