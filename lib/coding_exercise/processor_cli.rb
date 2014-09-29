@@ -28,7 +28,7 @@ class ProcessorCLI < Thor
       taxonomy_parser:    taxonomy_parser,
       renderer:           renderer
     }).call do |html, destination|
-      save_file html, destination
+      save_rendered_destination html, destination
       progress.increment
     end
   end
@@ -36,9 +36,11 @@ class ProcessorCLI < Thor
   desc 'clean', 'Remove generated site'
 
   def clean
-    if yes? "This will delete #{output_directory} and its contents. Type 'yes' to proceed"
+    if yes? "This will delete #{output_directory} and its contents. Are you sure you want to proceed? [yes,no]"
       say "Deleting #{output_directory}"
       FileUtils.rm_rf output_directory
+    else
+      say "Aborting clean."
     end
   end
 
@@ -90,11 +92,11 @@ class ProcessorCLI < Thor
       File.open path
     else
       puts "No such file #{path}. Aborting processing."
-      exit(1)
+      fail SystemExit
     end
   end
 
-  def save_file(html, destination)
+  def save_rendered_destination(html, destination)
     file_name = File.join options[:output], destination.file_name
     file = File.new file_name, 'w'
     file.write html
