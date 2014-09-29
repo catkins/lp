@@ -98,8 +98,8 @@ class ProcessorCLI < Thor
 
   def save_rendered_destination(html, destination)
     file_name = File.join options[:output], destination.file_name
-    file = File.new file_name, 'w'
-    file.write html
-    file.close
+    File.open file_name, 'w' do |f|
+      f.write html
+    end
   end
 end

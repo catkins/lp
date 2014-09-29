@@ -29,6 +29,7 @@ describe ProcessorCLI do
       context 'default output path' do
         it 'removes the directory at ProcessorCLI::DEFAULT_OUTPUT_PATH' do
           expect(FileUtils).to receive(:rm_rf).with ProcessorCLI::DEFAULT_OUTPUT_PATH
+
           capture(:stdout) { ProcessorCLI.start %w(clean) }
         end
       end
@@ -38,6 +39,7 @@ describe ProcessorCLI do
 
         it "removes the directory at given path" do
           expect(FileUtils).to receive(:rm_rf).with output_path
+
           capture(:stdout) { ProcessorCLI.start ['clean', '--output', output_path] }
         end
       end
@@ -89,11 +91,13 @@ describe ProcessorCLI do
 
       it 'creates the directory' do
         expect(FileUtils).to receive(:mkpath).with(output_path).and_call_original
+
         capture(:stdout) { ProcessorCLI.start args }
       end
 
       it 'notifies user of directory creation' do
         out = capture(:stdout) { ProcessorCLI.start args }
+
         expect(out).to match /Creating #{output_path}/
       end
     end
@@ -126,33 +130,46 @@ describe ProcessorCLI do
 
       it "copies the static assets to the output path" do
         expect(FileUtils).to receive(:cp_r).with static_assets_path, output_path
+
         capture(:stdout) { ProcessorCLI.start args }
       end
 
       it 'creates a DestinationRenderer with the template content' do
         expect(DestinationRenderer).to receive(:new).with(@template_content).and_call_original
+
         capture(:stdout) { ProcessorCLI.start args }
       end
 
       it "reads the taxonomy file" do
+        allow(File).to receive(:open).with(/#{output_path}/, 'w').and_call_original
         allow(File).to receive(:open).with(destinations_path).and_call_original
         expect(File).to receive(:open).with(taxonomy_path).and_call_original
+
         capture(:stdout) { ProcessorCLI.start args }
       end
 
       it 'creates a TaxonomyParser with a file handle' do
         expect(TaxonomyParser).to receive(:new).with(File).and_call_original
+
         capture(:stdout) { ProcessorCLI.start args }
       end
 
       it "reads the destinations file" do
+        allow(File).to receive(:open).with(/#{output_path}/, 'w').and_call_original
         allow(File).to receive(:open).with(taxonomy_path).and_call_original
         expect(File).to receive(:open).with(destinations_path).and_call_original
+
         capture(:stdout) { ProcessorCLI.start args }
       end
 
       it 'creates a DestinationParser with a file handle' do
         expect(DestinationParser).to receive(:new).with(File).and_call_original
+        capture(:stdout) { ProcessorCLI.start args }
+      end
+
+      it "writes files to the output directory" do
+        allow(File).to receive(:open).with(any_args).and_call_original
+        expect(File).to receive(:open).with(/#{output_path}/, 'w')
         capture(:stdout) { ProcessorCLI.start args }
       end
     end
