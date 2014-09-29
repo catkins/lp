@@ -13,7 +13,7 @@ describe DestinationParser do
   it { is_expected.to be_valid }
 
   describe '#destinations' do
-    it { should respond_to :destinations }
+    it { is_expected.to respond_to :destinations }
 
     it 'returns an Enumerable' do
       expect(subject.destinations).to be_a Enumerable

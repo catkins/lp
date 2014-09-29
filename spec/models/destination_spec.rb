@@ -7,36 +7,36 @@ describe Destination do
 
   subject(:destination) { Destination.new xml }
 
-  it { should_not be_nil }
+  it { is_expected.not_to be_nil }
 
   describe "XML attributes" do
     describe '#title' do
-      it { should respond_to :title }
+      it { is_expected.to respond_to :title }
 
       its(:title) { is_expected.to eq xml.attr('title') }
     end
 
     describe '#atlas_id' do
-      it { should respond_to :atlas_id }
+      it { is_expected.to respond_to :atlas_id }
 
       its(:atlas_id) { is_expected.to eq xml.attr('atlas_id') }
     end
 
     describe '#asset_id' do
-      it { should respond_to :asset_id }
+      it { is_expected.to respond_to :asset_id }
 
       its(:asset_id) { is_expected.to eq xml.attr('asset_id') }
     end
   end
 
   describe '#name' do
-    it { should respond_to :name }
+    it { is_expected.to respond_to :name }
 
     its(:name) { is_expected.to eq subject.title }
   end
 
   describe '#slug' do
-    it { should respond_to :slug }
+    it { is_expected.to respond_to :slug }
 
     it "contains the destination's name downcased and dasherised" do
       processed_name = subject.name.downcase.gsub(' ', '-')
@@ -47,7 +47,7 @@ describe Destination do
   end
 
   describe '#file_name' do
-    it { should respond_to :file_name }
+    it { is_expected.to respond_to :file_name }
 
     its(:file_name) { is_expected.to include subject.slug }
 
@@ -57,7 +57,7 @@ describe Destination do
   end
 
   describe '#sections' do
-    it { should respond_to :sections }
+    it { is_expected.to respond_to :sections }
 
     describe 'top level sections' do
       let(:sections) { subject.sections }
