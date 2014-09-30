@@ -3,10 +3,6 @@ require 'ruby-progressbar'
 
 module BatchProcessor
   class ProcessorCLI < Thor
-    DEFAULT_OUTPUT_PATH   = File.expand_path '../../../dist', __FILE__
-    LIBRARY_PATH          = File.dirname __FILE__
-    DEFAULT_TEMPLATE_PATH = File.join LIBRARY_PATH, 'views/destination.html.erb'
-    STATIC_ASSETS_PATH    = File.join LIBRARY_PATH, 'static'
 
     class_option :output, aliases: ['-o'], banner: 'OUTPUT_DIRECTORY', default: DEFAULT_OUTPUT_PATH
 

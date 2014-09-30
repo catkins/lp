@@ -17,7 +17,7 @@ module BatchProcessor
       it { is_expected.not_to be_nil }
 
       it ':output defaults to ProcessorCLI::DEFAULT_OUTPUT_PATH' do
-        expect(subject.options[:output]).to eq ProcessorCLI::DEFAULT_OUTPUT_PATH
+        expect(subject.options[:output]).to eq DEFAULT_OUTPUT_PATH
       end
     end
 
@@ -29,7 +29,7 @@ module BatchProcessor
 
         context 'default output path' do
           it 'removes the directory at ProcessorCLI::DEFAULT_OUTPUT_PATH' do
-            expect(FileUtils).to receive(:rm_rf).with ProcessorCLI::DEFAULT_OUTPUT_PATH
+            expect(FileUtils).to receive(:rm_rf).with DEFAULT_OUTPUT_PATH
 
             capture(:stdout) { ProcessorCLI.start %w(clean) }
           end
@@ -64,15 +64,15 @@ module BatchProcessor
       before(:all) do
         @taxonomy_content     = File.read File.expand_path('../../data/taxonomy.xml', __FILE__)
         @destinations_content = File.read File.expand_path('../../data/destinations.xml', __FILE__)
-        @template_content     = File.read ProcessorCLI::DEFAULT_TEMPLATE_PATH
+        @template_content     = File.read DEFAULT_TEMPLATE_PATH
       end
 
       # write outr equired content to fake filesystem
       before(:each) do
         FileUtils.mkdir_p 'path/to'
-        FileUtils.mkdir_p File.dirname(ProcessorCLI::DEFAULT_TEMPLATE_PATH)
-        FileUtils.mkdir_p ProcessorCLI::STATIC_ASSETS_PATH
-        FileUtils.mkdir_p ProcessorCLI::DEFAULT_OUTPUT_PATH
+        FileUtils.mkdir_p File.dirname(DEFAULT_TEMPLATE_PATH)
+        FileUtils.mkdir_p STATIC_ASSETS_PATH
+        FileUtils.mkdir_p DEFAULT_OUTPUT_PATH
 
         destinations_file = File.open destinations_path, 'w'
         destinations_file.write @destinations_content
@@ -80,7 +80,7 @@ module BatchProcessor
         taxonomy_file = File.open taxonomy_path, 'w'
         taxonomy_file.write @taxonomy_content
 
-        template_file = File.open ProcessorCLI::DEFAULT_TEMPLATE_PATH, 'w'
+        template_file = File.open DEFAULT_TEMPLATE_PATH, 'w'
         template_file.write @template_content
 
         # stub out ruby-progressbar output
@@ -124,8 +124,8 @@ module BatchProcessor
       end
 
       context 'when valid file paths passed' do
-        let(:static_assets_path) { ProcessorCLI::STATIC_ASSETS_PATH }
-        let(:output_path) { ProcessorCLI::DEFAULT_OUTPUT_PATH }
+        let(:static_assets_path) { STATIC_ASSETS_PATH }
+        let(:output_path) { DEFAULT_OUTPUT_PATH }
         let(:args) { ['build', '-d', destinations_path, '-t', taxonomy_path ] }
 
 
