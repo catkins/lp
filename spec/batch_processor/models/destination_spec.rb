@@ -2,8 +2,8 @@ require 'spec_helper'
 
 module BatchProcessor
   describe Destination do
-    let(:destinations_file_path) { File.expand_path('../../../data/destinations.xml', __FILE__) }
-    let(:destinations_file) { File.open destinations_file_path }
+    let(:destinations_file) { File.open DESTINATIONS_FILE_PATH }
+
     let(:xml) { Nokogiri.XML(destinations_file).xpath('//destination').first }
 
     subject(:destination) { Destination.new xml }

@@ -2,8 +2,7 @@ require 'spec_helper'
 module BatchProcessor
   describe DestinationParser do
 
-    let(:destinations_file_path) { File.expand_path('../../data/destinations.xml', __FILE__) }
-    let(:destinations_file) { File.open destinations_file_path }
+    let(:destinations_file) { File.open DESTINATIONS_FILE_PATH }
 
     after(:each) { destinations_file.close }
 

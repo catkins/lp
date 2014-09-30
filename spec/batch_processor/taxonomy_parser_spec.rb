@@ -1,9 +1,7 @@
 require 'spec_helper'
 module BatchProcessor
   describe TaxonomyParser do
-
-    let(:taxonomy_file_path) { File.expand_path('../../data/taxonomy.xml', __FILE__) }
-    let(:taxonomy_file) { File.open taxonomy_file_path }
+    let(:taxonomy_file) { File.open TAXONOMY_FILE_PATH }
 
     after(:each) { taxonomy_file.close }
 

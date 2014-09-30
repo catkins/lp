@@ -62,8 +62,8 @@ module BatchProcessor
       let(:taxonomy_path)     { 'path/to/taxonomy.xml' }
 
       before(:all) do
-        @taxonomy_content     = File.read File.expand_path('../../data/taxonomy.xml', __FILE__)
-        @destinations_content = File.read File.expand_path('../../data/destinations.xml', __FILE__)
+        @taxonomy_content     = File.read TAXONOMY_FILE_PATH
+        @destinations_content = File.read DESTINATIONS_FILE_PATH
         @template_content     = File.read DEFAULT_TEMPLATE_PATH
       end
 

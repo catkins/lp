@@ -17,6 +17,12 @@ end
 
 require 'batch_processor'
 
+# loations of test data
+module BatchProcessor
+  DESTINATIONS_FILE_PATH = File.expand_path('../data/destinations.xml', __FILE__)
+  TAXONOMY_FILE_PATH     = File.expand_path('../data/taxonomy.xml', __FILE__)
+end
+
 RSpec.configure do |config|
 
   # force the newer expect syntax

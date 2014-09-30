@@ -2,8 +2,7 @@ require 'spec_helper'
 
 module BatchProcessor
   describe TaxonomyNode do
-    let(:taxonomy_file_path) { File.expand_path('../../../data/taxonomy.xml', __FILE__) }
-    let(:taxonomy_file) { File.open taxonomy_file_path }
+    let(:taxonomy_file) { File.open TAXONOMY_FILE_PATH }
     let(:xml) { Nokogiri.XML(taxonomy_file).xpath('/taxonomies//node').first }
 
     subject(:taxonomy_node) { TaxonomyNode.new xml }
