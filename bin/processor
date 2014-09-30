@@ -3,6 +3,6 @@
 # add lib directory to load path
 $: << File.expand_path("../../lib/", __FILE__)
 
-require 'coding_exercise'
+require 'batch_processor'
 
-ProcessorCLI.start(ARGV)
+BatchProcessor::ProcessorCLI.start(ARGV)

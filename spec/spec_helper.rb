@@ -15,7 +15,7 @@ if ENV['COVERAGE']
   end
 end
 
-require 'coding_exercise'
+require 'batch_processor'
 
 RSpec.configure do |config|
 
