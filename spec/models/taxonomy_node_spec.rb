@@ -34,21 +34,9 @@ describe TaxonomyNode do
 
     its(:atlas_id) { is_expected.to eq subject.atlas_node_id }
   end
-
-  describe '#slug' do
-    it { is_expected.to respond_to :slug }
-
-    it "contains the node's name downcased and dasherised_name" do
-      processed_name = subject.name.downcase.gsub ' ', '-'
-      expect(subject.slug).to include processed_name
-    end
-
-    its(:slug) { is_expected.to include subject.atlas_id }
-  end
-
   describe '#file_name' do
     it { is_expected.to respond_to :file_name }
-    its(:file_name) { is_expected.to include subject.slug }
+    its(:file_name) { is_expected.to include subject.atlas_id }
   end
 
   describe '#ancestors' do

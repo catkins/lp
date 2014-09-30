@@ -13,13 +13,8 @@ class Destination
     title
   end
 
-  def slug
-    dasherised_name = name.downcase.gsub(' ', '-')
-    "#{atlas_id}-#{dasherised_name}"
-  end
-
   def file_name
-    "#{slug}.html"
+    "#{atlas_id}.html"
   end
 
   def sections
